@@ -1,0 +1,26 @@
+name: Contribution Bot
+
+on:
+  schedule:
+    # This runs at 12:00 PM every day (UTC)
+    - cron: '0 12 * * *'
+  workflow_dispatch: # This allows you to run it manually to test it
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Update Heartbeat
+        run: |
+          echo "Last bot activity: $(date)" > heartbeat.txt
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add heartbeat.txt
+          git commit -m "Automated daily update"
+          git push
