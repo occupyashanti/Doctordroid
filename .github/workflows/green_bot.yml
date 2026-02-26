@@ -19,7 +19,7 @@ jobs:
 
       - name: Commit and Push
         run: |
-         git config --global user.name "occupyashanti"
+          git config --global user.name "occupyashanti"
           git config --global user.email "occupyashanti@gmail.com"
           git add heartbeat.txt
           git commit -m "Automated daily update"
